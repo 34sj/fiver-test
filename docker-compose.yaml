@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  mysql:
+    image: mysql:8.0.34
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: redhat # MySQLパスワード設定
+      MYSQL_DATABASE: DB # MySQLデータベース名設定
+      MYSQL_USER: ctsetera # MYSQL_DATABASEで指定したDBの権限をもつユーザ
+      MYSQL_PASSWORD: redhat # hogeuserユーザのパスワード
+      TZ: Asia/Tokyo # タイムゾーン
+    volumes:
+      - mysqldata:/var/lib/mysql # DBデータ永続化
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./initdb.d:/docker-entrypoint-initdb.d 
+    ports:
+      - 3306:3306
+volumes:
+  mysqldata:
