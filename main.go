@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/34sj/fiver-test/book"
 	"github.com/gofiber/fiber/v3"
 )
 
@@ -12,6 +13,11 @@ func helloWorld(c fiber.Ctx) error {
 
 func setupRoutes(app *fiber.App) {
 	app.Get("/", helloWorld)
+
+	app.Get("/api/v1/book", book.GetBooks)
+	app.Get("/api/v1/book/:id", book.GetBook)
+	app.Post("/api/v1/book", book.NewBook)
+	app.Delete("/api/v1/book/:id", book.DeleteBook)
 }
 
 func main() {
